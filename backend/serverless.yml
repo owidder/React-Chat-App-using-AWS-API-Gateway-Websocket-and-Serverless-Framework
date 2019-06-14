@@ -5,7 +5,7 @@ provider:
   runtime: nodejs8.10
   stackName: ${self:service}-${self:provider.stage}
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'ap-southeast-2'}
+  region: ${opt:region, 'eu-central-1'}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -39,11 +39,8 @@ functions:
     events:
       - websocket:
           route: $connect
-          authorizer: authorizerFunc # references the authorizerFunc function below
       - websocket:
           route: $disconnect
-  authorizerFunc:
-    handler: handler.authorizerFunc
   defaultMessages:
     handler: handler.defaultMessage
     events:
